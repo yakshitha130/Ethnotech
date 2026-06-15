@@ -27,7 +27,7 @@ public class FestR {
             students.remove(s1);
         }
 
-        System.out.println("\nAfter Unregistration:");
+        System.out.println("After Unregistration:");
         for (String s1 : students) {
             System.out.println(s1);
         }

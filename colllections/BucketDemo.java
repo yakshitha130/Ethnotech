@@ -9,5 +9,9 @@ public class BucketDemo {
         h.put("chunchu", 4);
         h.put("chitti", 5);
         System.out.println(h);
+        for(Map.Entry<String, Intger> e:h entryset())
+        {
+            
+        }
     }
 }
