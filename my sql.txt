@@ -1,0 +1,520 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 27
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use ethnotech_y;
+Database changed
+mysql> create databse ethnotech_y;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databse ethnotech_y' at line 1
+mysql> create databse ethnotech_y;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databse ethnotech_y' at line 1
+mysql> create database ethnotech_y;
+ERROR 1007 (HY000): Can't create database 'ethnotech_y'; database exists
+mysql> use ethnotech_y;
+Database changed
+mysql> select * from stud;
++----+----------+-------------------------+------+---------+--------+------------+-----------+---------------------+
+| id | name     | email                   | age  | city    | score  | enroll     | is_active | created_at          |
++----+----------+-------------------------+------+---------+--------+------------+-----------+---------------------+
+|  1 | yakshi   | yakshitha.n19@gmail.com |   21 | mpl     |  75.62 | 2026-06-12 |         1 | 2025-08-21 00:00:00 |
+|  2 | sreedevi | sree.n19@gmail.com      |   41 | mpl     |  75.62 | 2024-06-12 |         0 | 2024-09-09 00:00:00 |
+|  3 | sneha    | sneha@gmail.com         |   21 | bnglr   |  56.78 | 2026-06-17 |         1 | 2026-07-12 21:09:23 |
+|  4 | likky    | likky@gmail.com         |   20 | chennai |  89.82 | 2026-05-14 |         0 | 2026-07-12 00:00:00 |
+|  5 | shilpa   | shilpa@gmail.com        |   25 | bnglr   |  17.90 | 2026-06-12 |         1 | 2026-05-11 11:11:11 |
+|  6 | kavya    | kavya@gmail.com         |   22 | bnglr   | 800.82 | 2026-08-19 |         1 | 2026-07-12 21:09:23 |
++----+----------+-------------------------+------+---------+--------+------------+-----------+---------------------+
+6 rows in set (0.02 sec)
+
+mysql> select name if(score 75.25,'pass','fail') as result from std;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'if(score 75.25,'pass','fail') as result from std' at line 1
+mysql> select name if(score 75.25,'pass','fail') as result from stud;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'if(score 75.25,'pass','fail') as result from stud' at line 1
+mysql> select name if(score 75.25, 'pass', 'fail') as result from stud;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'if(score 75.25, 'pass', 'fail') as result from stud' at line 1
+mysql> select name, if(score 75.25, 'pass', 'fail') as result from stud;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '75.25, 'pass', 'fail') as result from stud' at line 1
+mysql> select name, if(score<75.25, 'pass', 'fail') as result from stud;
++----------+--------+
+| name     | result |
++----------+--------+
+| yakshi   | fail   |
+| sreedevi | fail   |
+| sneha    | pass   |
+| likky    | fail   |
+| shilpa   | pass   |
+| kavya    | fail   |
++----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select name,score;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select name,score
+    -> select name,score;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select name,score' at line 2
+mysql> select name,score,
+    -> CASE
+    ->      WHEN score >= 90 THEN 'Execellent'
+    ->      WHEN score >= 75 THEN 'Good'
+    ->      WHEN score >= 50 THEN 'Average'
+    ->      ELSE 'D'
+    -> END AS grade
+    -> FROM stud;
++----------+--------+------------+
+| name     | score  | grade      |
++----------+--------+------------+
+| yakshi   |  75.62 | Good       |
+| sreedevi |  75.62 | Good       |
+| sneha    |  56.78 | Average    |
+| likky    |  89.82 | Good       |
+| shilpa   |  17.90 | D          |
+| kavya    | 800.82 | Execellent |
++----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select name,score,
+    -> CASE
+    ->      WHEN score >= 90 THEN 'A';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql>      WHEN score >= 90 THEN 'A';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHEN score >= 90 THEN 'A'' at line 1
+mysql> create table transaction(t_id int,amount int,c_id int);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into transaction(t_id int,amount int,c_id int) values( 1,10000,100),(2,20000,101),(3,45567,90),(5,46767,91);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int,amount int,c_id int) values( 1,10000,100),(2,20000,101),(3,45567,90),(5,4676' at line 1
+mysql> insert into transaction(t_id int,amount int,c_id int) values ( 1,10000,100),(2,20000,101),(3,45567,90),(5,46767,91);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int,amount int,c_id int) values ( 1,10000,100),(2,20000,101),(3,45567,90),(5,467' at line 1
+mysql> insert into transaction values ( 1,10000,100),(2,20000,101),(3,45567,90),(5,46767,91);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from transactions
+    -> select * from transactions ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from transactions' at line 2
+mysql> select * from transaction;
++------+--------+------+
+| t_id | amount | c_id |
++------+--------+------+
+|    1 |  10000 |  100 |
+|    2 |  20000 |  101 |
+|    3 |  45567 |   90 |
+|    5 |  46767 |   91 |
++------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> create table trans(t_id int primary key auto_increment, name varchar(20),amount int,c_id int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into trans values ( 1,10000,100),(2,20000,101),(3,45567,90),(5,46767,91);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into trans values ( 1,'yakshi',10000,100),(2,'kavya',20000,101),(3,'hyma',45567,90),(5,'glory',46767,91);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from trans;
++------+--------+--------+------+
+| t_id | name   | amount | c_id |
++------+--------+--------+------+
+|    1 | yakshi |  10000 |  100 |
+|    2 | kavya  |  20000 |  101 |
+|    3 | hyma   |  45567 |   90 |
+|    5 | glory  |  46767 |   91 |
++------+--------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> create table customer(c_id primary key auto_increment, name varchar(30),amount int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key auto_increment, name varchar(30),amount int)' at line 1
+mysql> create table customer(c_id int primary key auto_increment, name varchar(30),amount int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from customer;
+Empty set (0.00 sec)
+
+mysql> insert into customer values(100,'yakshi',18000),(101,'kavya',25353),(90,'hyma',6778),(91,'glory,7838);
+    '> insert into customer values(100,'yakshi',18000),(101,'kavya',25353),(90,'hyma',6778),(91,'glory',7838);
+    '>
+    '> ^X
+    '> stop;
+    '> select * from customer;
+    '> create table customer(c_id int primary key auto_increment, name varchar(30),amount int);
+    '> ">
+    '> mysql>
+    '> /c
+    '> ">;
+    '> ^C
+mysql> insert into customer values(100,'yakshi',18000),(101,'kavya',25353),(90,'hyma',6778),(91,'glory',7838);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from cutomer;
+ERROR 1146 (42S02): Table 'ethnotech_y.cutomer' doesn't exist
+mysql> select * from customer;
++------+--------+--------+
+| c_id | name   | amount |
++------+--------+--------+
+|   90 | hyma   |   6778 |
+|   91 | glory  |   7838 |
+|  100 | yakshi |  18000 |
+|  101 | kavya  |  25353 |
++------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> create table tran(t_id int primary key auto_increment,name varchra(20),amount int,c_id int unique);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchra(20),amount int,c_id int unique)' at line 1
+mysql> create table tran(t_id int primary key auto_increment,name varchar(20),amount int,c_id int unique);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into tran values ( 1,'yakshi',10000,100),(2,'kavya',20000,101),(3,'hyma',45567,90),(5,'glory',46767,91);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from tran;
++------+--------+--------+------+
+| t_id | name   | amount | c_id |
++------+--------+--------+------+
+|    1 | yakshi |  10000 |  100 |
+|    2 | kavya  |  20000 |  101 |
+|    3 | hyma   |  45567 |   90 |
+|    5 | glory  |  46767 |   91 |
++------+--------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE cust (
+    ->         T_id INT PRIMARY KEY,
+    ->         name VARCHAR(15),
+    ->         t_amount INT,
+    ->          customer_id INT,
+    ->         FOREIGN KEY (customer_id) REFERENCES trans(c_id)
+    ->          );
+ERROR 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'cust_ibfk_1' in the referenced table 'trans'
+mysql> CREATE TABLE cust (
+    ->         T_id INT PRIMARY KEY,
+    ->         name VARCHAR(15),
+    ->         t_amount INT,
+    ->          customer_id INT,
+    ->         FOREIGN KEY (customer_id) REFERENCES trans(c_id)
+    ->         );
+ERROR 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'cust_ibfk_1' in the referenced table 'trans'
+mysql> CREATE TABLE cust (
+    ->         T_id INT PRIMARY KEY,
+    ->         name VARCHAR(15),
+    ->         t_amount INT,
+    ->          customer_id INT,
+    ->         FOREIGN KEY (customer_id) REFERENCES tran(c_id)
+    ->          );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> INSERT INTO cust (T_id, name, t_amount, customer_id)
+    ->      VALUES
+    ->      (1, 'Ramesh', 15000, 101),
+    ->     (2, 'Anita', 22000, 102),
+    ->      (3, 'Kiran', 18000, 103),
+    ->      (4, 'Divya', 25000, 104),
+    ->     (5, 'Rahul', 30000, 105);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`ethnotech_y`.`cust`, CONSTRAINT `cust_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `tran` (`c_id`))
+mysql> create database ethnotech
+    -> create database ethnotech;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create database ethnotech' at line 2
+mysql> create database ethnotech;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use ethnotech;
+Database changed
+mysql> create table trans(t_id int primary key,t_amount int,c_id int not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into trans values(1,10000,101),(2,25000,102),(3,41000,103),(4,12000,104),(5,300000,105);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from trans
+    -> select * from trans;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from trans' at line 2
+mysql> select * from trans;
++------+----------+------+
+| t_id | t_amount | c_id |
++------+----------+------+
+|    1 |    10000 |  101 |
+|    2 |    25000 |  102 |
+|    3 |    41000 |  103 |
+|    4 |    12000 |  104 |
+|    5 |   300000 |  105 |
++------+----------+------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE cust (
+    ->        T_id INT PRIMARY KEY,
+    ->        name VARCHAR(15),
+    ->         t_amount INT,
+    ->        customer_id INT,
+    ->          FOREIGN KEY (customer_id) REFERENCES trans(c_id)
+    ->      );
+ERROR 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'cust_ibfk_1' in the referenced table 'trans'
+mysql> ALTER TABLE trans
+    -> ADD UNIQUE(c_id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE cust (
+    ->        T_id INT PRIMARY KEY,
+    ->        name VARCHAR(15),
+    ->         t_amount INT,
+    ->        customer_id INT,
+    ->          FOREIGN KEY (customer_id) REFERENCES trans(c_id)
+    ->      );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO cust (T_id, name, t_amount, customer_id)
+    ->     VALUES
+    ->     (1, 'Ramesh', 15000, 101),
+    ->     (2, 'Anita', 22000, 102),
+    ->    (3, 'Kiran', 18000, 103),
+    ->     (4, 'Divya', 25000, 104),
+    ->     (5, 'Rahul', 30000, 105);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from cust;
++------+--------+----------+-------------+
+| T_id | name   | t_amount | customer_id |
++------+--------+----------+-------------+
+|    1 | Ramesh |    15000 |         101 |
+|    2 | Anita  |    22000 |         102 |
+|    3 | Kiran  |    18000 |         103 |
+|    4 | Divya  |    25000 |         104 |
+|    5 | Rahul  |    30000 |         105 |
++------+--------+----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select
+    ->    cust.customer_id,cust.name,cust.t_amount
+    ->     from cust
+    ->      inner join
+    ->      trans on
+    ->      cust.customer_id=trans.c_id;
++-------------+--------+----------+
+| customer_id | name   | t_amount |
++-------------+--------+----------+
+|         101 | Ramesh |    15000 |
+|         102 | Anita  |    22000 |
+|         103 | Kiran  |    18000 |
+|         104 | Divya  |    25000 |
+|         105 | Rahul  |    30000 |
++-------------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select
+    -> cust.c_id,cust.name,cust.amount
+    -> from cust
+    -> left join
+    -> tran on
+    -> cust.c_id=trans.c_id
+    -> union
+    -> trans.c_id,trans.name,trans.amount
+    -> from trans
+    -> right join
+    -> cust on
+    -> trans.c_id=cust.c_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'trans.c_id,trans.name,trans.amount
+from trans
+right join
+cust on
+trans.c_id=cus' at line 8
+mysql> select
+    ->     cust.customer_id,cust.name,cust.amount
+    ->     from cust
+    ->     left join
+    ->      tran on
+    ->     cust.custome_id=trans.c_id
+    ->     union
+    ->     trans.c_id,trans.name,trans.amount
+    ->    from trans
+    ->     right join
+    ->     cust on
+    ->    trans.c_id=cust.customer_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'trans.c_id,trans.name,trans.amount
+   from trans
+    right join
+    cust on
+   t' at line 8
+mysql> select
+    ->     cust.customer_id,cust.name,cust.amount
+    ->     from cust
+    ->     left join
+    ->      trans on
+    ->     cust.customer_id=trans.c_id
+    ->     union
+    ->     trans.c_id,trans.name,trans.amount
+    ->    from trans
+    ->     right join
+    ->     cust on
+    ->    trans.c_id=cust.customer_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'trans.c_id,trans.name,trans.amount
+   from trans
+    right join
+    cust on
+   t' at line 8
+mysql> select
+    ->      cust.customer_id,cust.name,cust.t_amount
+    ->      from cust
+    ->      left join
+    ->     trans on
+    ->      cust.customer_id=trans.c_id
+    ->     union
+    ->      select
+    ->      trans.c_id,trans.name,trans.t_amount
+    ->     from trans
+    ->     right join
+    ->     cust on
+    ->      trans.c_id=cust.customer_id;
+ERROR 1054 (42S22): Unknown column 'trans.name' in 'field list'
+mysql> alter table  trans add name varchar(15);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select
+    ->      cust.customer_id,cust.name,cust.t_amount
+    ->      from cust
+    ->      left join
+    ->     trans on
+    ->      cust.customer_id=trans.c_id
+    ->     union
+    ->      select
+    ->      trans.c_id,trans.name,trans.t_amount
+    ->     from trans
+    ->     right join
+    ->     cust on
+    ->      trans.c_id=cust.customer_id;
++-------------+--------+----------+
+| customer_id | name   | t_amount |
++-------------+--------+----------+
+|         101 | Ramesh |    15000 |
+|         102 | Anita  |    22000 |
+|         103 | Kiran  |    18000 |
+|         104 | Divya  |    25000 |
+|         105 | Rahul  |    30000 |
+|         101 | NULL   |    10000 |
+|         102 | NULL   |    25000 |
+|         103 | NULL   |    41000 |
+|         104 | NULL   |    12000 |
+|         105 | NULL   |   300000 |
++-------------+--------+----------+
+10 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from trans;
++------+----------+------+------+
+| t_id | t_amount | c_id | name |
++------+----------+------+------+
+|    1 |    10000 |  101 | NULL |
+|    2 |    25000 |  102 | NULL |
+|    3 |    41000 |  103 | NULL |
+|    4 |    12000 |  104 | NULL |
+|    5 |   300000 |  105 | NULL |
++------+----------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from cust;
++------+--------+----------+-------------+
+| T_id | name   | t_amount | customer_id |
++------+--------+----------+-------------+
+|    1 | Ramesh |    15000 |         101 |
+|    2 | Anita  |    22000 |         102 |
+|    3 | Kiran  |    18000 |         103 |
+|    4 | Divya  |    25000 |         104 |
+|    5 | Rahul  |    30000 |         105 |
++------+--------+----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> create database work;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use work;
+Database changed
+mysql> create table customer (
+    ->     customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     customer_name VARCHAR(50),
+    ->     account_no VARCHAR(20) UNIQUE);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql>
+mysql>     INSERT INTO customer(customer_name,account_no) VALUES('Yash','ACC101'),('vara','ACC102'),('sandy','ACC103'),('venky','ACC104');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> create table  transactions (
+    ->     trans_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     customer_id INT,amount DECIMAL(10,2),trans_date DATE,
+    ->     FOREIGN KEY (customer_id) REFERENCES customer(customer_id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>
+mysql> insert into transactions(customer_id,amount,trans_date) VALUES(1,5000,'2026-06-01'),(1,2000,'2026-06-01'),(2,3500,'2026-06-02'),(2,3500,'2026-06-02'),(3,1000,'2026-06-03');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> /*1. Transactions Exceeding 3000*/
+mysql> select *from transactions where amount > 3000;
++----------+-------------+---------+------------+
+| trans_id | customer_id | amount  | trans_date |
++----------+-------------+---------+------------+
+|        1 |           1 | 5000.00 | 2026-06-01 |
+|        3 |           2 | 3500.00 | 2026-06-02 |
+|        4 |           2 | 3500.00 | 2026-06-02 |
++----------+-------------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> /*2. Average Transaction Per Customer Per Day*/
+mysql> select customer_id,trans_date,avg(amount) AS avg_amount
+    -> from transactions group by customer_id, trans_date;
++-------------+------------+-------------+
+| customer_id | trans_date | avg_amount  |
++-------------+------------+-------------+
+|           1 | 2026-06-01 | 3500.000000 |
+|           2 | 2026-06-02 | 3500.000000 |
+|           3 | 2026-06-03 | 1000.000000 |
++-------------+------------+-------------+
+3 rows in set (0.01 sec)
+
+mysql> /*3. Total Amount Transacted by Each Customer*/
+mysql> select customer_id,SUM(amount) AS total_amount
+    -> from transactions group by customer_id;
++-------------+--------------+
+| customer_id | total_amount |
++-------------+--------------+
+|           1 |      7000.00 |
+|           2 |      7000.00 |
+|           3 |      1000.00 |
++-------------+--------------+
+3 rows in set (0.01 sec)
+
+mysql> /*4. Repeated Transactions*/
+mysql> select customer_id,amount,COUNT(*) AS count from transactions
+    -> group by customer_id, amount having COUNT(*) > 1;
++-------------+---------+-------+
+| customer_id | amount  | count |
++-------------+---------+-------+
+|           2 | 3500.00 |     2 |
++-------------+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> /*5. Customers With No Transactions*/
+mysql> select c.customer_id,c.customer_name from customer c
+    -> LEFT JOIN transactions t ON c.customer_id = t.customer_id
+    -> where t.trans_id IS NULL;
++-------------+---------------+
+| customer_id | customer_name |
++-------------+---------------+
+|           4 | venky         |
++-------------+---------------+
+1 row in set (0.00 sec)
+
+mysql>
