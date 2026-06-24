@@ -1,0 +1,23 @@
+use mits1
+switched to db mits1
+db.student.insertOne({ name:"sushmitha",id:1,city:"madanapalli"})
+db.student.findOne({name:"sushmitha"})
+db.student.insertMany([{ name:"madhu",id:2,city:"bangalore"},{name:"yakshi",id:3,city:"madanapalli"},{name:"chukka",id:4,city:"Nallamalla forest"}])
+db.student.find()
+db.student.updateMany({},{$set:{age:25}})
+db.student.updateOne({name:"madhu"},{$set:{age:78}})
+db.student.find({age:{$gt:25}})
+gt-greater than
+lt-less than
+lte-less than or equal to
+db.student.find({$or:[ { city :'madanapalli'},{city:'bangalore'}]})
+db.student.find().sort({age:1})
+db.student.find().limit(2)
+db.student.aggregate([
+  {
+    $group: {
+      _id: null,
+      avgAge: { $avg: "$age" }
+    }
+  }
+])
